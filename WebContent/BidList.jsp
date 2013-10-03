@@ -24,7 +24,8 @@
 			//end of for
 		%>
 
-	</table><br><a href="ItemRegistration.jsp">Place an item for auction</a><br>
+	</table>
+	<br><a href="ItemRegistration.jsp">Place an item for auction</a><br>
 	 
 </body>
 </html>
