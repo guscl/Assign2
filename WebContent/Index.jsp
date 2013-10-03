@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<form>
+	<form action="ControlServlet?action=login" method ="post" >
 		<table>
 			<tr>
 				<td>Username</td>
