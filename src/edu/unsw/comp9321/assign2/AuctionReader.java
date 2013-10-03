@@ -9,7 +9,7 @@ import java.sql.*;
 public class AuctionReader {
 	ConnectionManager cm;
 	Connection c;
-	String auctionQuery = "";
+	String auctionQuery = "SELECT * FROM auction WHERE status='started'";
 	PreparedStatement query;
 	
 	public AuctionReader() {
@@ -32,6 +32,14 @@ public class AuctionReader {
 		ResultSet set = null;
 		try {
 			set = query.executeQuery();
+			if (set == null) {
+				System.out.println("No rows returned");
+				return null;
+			}
+			else {
+				System.out.println("returning results");
+				return set;
+			}
 		}
 		catch (SQLException s) {
 			System.out.println("Error executing query");
