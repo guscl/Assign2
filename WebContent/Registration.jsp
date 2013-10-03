@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form name="userRegistration" action="controller?action=register" method="POST">
+<form name="userRegistration" action="ControlServlet?action=register" method="POST">
 			<input type="hidden" name="action" value="register"/>
 			<table>
 			<tr>
