@@ -1,4 +1,5 @@
 package edu.unsw.comp9321.assign2;
+
 import java.sql.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -24,8 +25,14 @@ public class authenticator {
 			login.setString(2, password);
 			ResultSet result = login.executeQuery();
 			if (result.next()) {
-				RequestDispatcher rd = request.getRequestDispatcher("Main.jsp");
-				rd.forward(request, response);
+				if (result.getString("role").equals("administrator")) {
+					RequestDispatcher rd = request.getRequestDispatcher("Admin.jsp");
+					rd.forward(request, response);
+				}
+				else {
+					RequestDispatcher rd = request.getRequestDispatcher("Main.jsp");
+					rd.forward(request, response);
+				}
 			}
 			else {
 				RequestDispatcher rd = request.getRequestDispatcher("LoginFailed.jsp");
