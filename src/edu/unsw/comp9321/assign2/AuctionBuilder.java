@@ -8,35 +8,28 @@ import javax.servlet.http.HttpServletResponse;
 public class AuctionBuilder {
 	ConnectionManager cm;
 	Connection c;
-	PreparedStatement insertItem; // insert item
 	PreparedStatement auction; // insert item
-	PreparedStatement item; // query item to get ID
-	String itemString;
 	String auctionString;
-	String itemQueryString;
 	
 	public AuctionBuilder() {
 		cm = new ConnectionManager();
 		c = cm.getConnection();
-		itemString = "INSERT INTO item " +
-						"(title, category, picture, description, " +
-						"postagedetails, reserveprice, bidincrement)" +
-						"VALUES (?, ?, 'photo.jpg', ?, ?, ?, ?)"; 
-		auctionString = "INSERT INTO auction " +
-						"(item, username, auctionlength)" +
-						"VALUES (?, ?, ?)";
-		itemQueryString = "SELECT * FROM item WHERE title=?";
+		
+		auctionString = "INSERT INTO auction (username, starttime, " +
+							"auctionlength, status, title, category, " +
+							"picture, description, postagedetails, " +
+							"reserveprice, bidincrement)" +
+						"VALUES (?, ?, ?, 'new', ?, ?, 'image.jpg', ?, ?, ?, ?)";
 		
 		// prepare statement
 		try {
-			insertItem = c.prepareStatement(itemString);
 			auction = c.prepareStatement(auctionString);
-			item = c.prepareStatement(itemQueryString);
 		}
 		catch (SQLException s) {
-			System.out.println("failed to prepare statement");
+			System.out.println("An error occured initialising query");
 			s.printStackTrace();
 		}
+		
 	}
 	
 	/*
@@ -46,13 +39,47 @@ public class AuctionBuilder {
 	 */
 	public void createAuction(HttpServletRequest request, HttpServletResponse response) {
 		/*This version does not yet allow for pictures to be added*/
-		boolean itemResult;
+		System.out.println("createAuction called");
 		
-		itemResult = addToItem(request);
-		if (itemResult) {
-			addToAuction(request, response);
+		try {
+			auction.setString(1, "user1");
+			//auction.setString(1, request.getParameter("username"));
+			auction.setString(2, request.getParameter("start"));
+			if (request.getParameter("length").equals("")) {
+				auction.setString(3, "10"); System.out.println("empty length default to 10");
+			}
+			else {
+				auction.setString(3, request.getParameter("length"));System.out.println("specified length");
+			}
+			auction.setString(4, request.getParameter("title"));
+			auction.setString(5, request.getParameter("category"));
+			auction.setString(6, request.getParameter("description"));
+			auction.setString(7, request.getParameter("postage"));
+			auction.setString(8, request.getParameter("reserve"));
+			auction.setString(9, request.getParameter("bidincrement"));
+			int result = auction.executeUpdate();
+			if (result > 0) {
+				System.out.println("successfully added auction");
+				RequestDispatcher rd = request.getRequestDispatcher("Success.jsp");
+				try {
+					rd.forward(request, response);
+				}
+				catch (Exception e) {
+					
+				}
+				
+			}
+			else {
+				redirectFailedAttempt(request, response);
+			}
+		}
+		catch (SQLException s) {
+			System.out.println("An error occured querying the database");
+			s.printStackTrace();
+			redirectFailedAttempt(request, response);
 		}
 		
+		return;
 	}
 	
 	/*
@@ -62,108 +89,6 @@ public class AuctionBuilder {
 	 */
 	public void confirm() { // rename to startAuction if needed
 		
-	}
-	
-	/*
-	 * Adds item details to the Item table
-	 */
-	private boolean addToItem(HttpServletRequest request) {
-		boolean result = true;
-		try {
-			insertItem.setString(1, request.getParameter("title"));
-			insertItem.setString(2, request.getParameter("category"));
-			// photo
-			insertItem.setString(3, request.getParameter("description"));
-			insertItem.setString(4, request.getParameter("postage"));
-			insertItem.setString(5, request.getParameter("reserve"));
-			insertItem.setString(6, request.getParameter("bidincrement"));
-			
-		}
-		catch (Exception e) {
-			System.out.println("Error preparing item");
-			e.printStackTrace();
-		}
-		
-		try {
-			int rowsUpdated = insertItem.executeUpdate();
-			if (rowsUpdated > 0) {
-				System.out.println("item successfully added");
-				result = true;
-			}
-			else {
-				System.out.println("addToItem: Failed to add item");
-				result = false;
-			}
-		}
-		catch (Exception e) {
-			System.out.println("Error adding the item to the database");
-			e.printStackTrace();
-		}
-		return result;
-	}
-	
-	/*
-	 * Adds auction details to Auction table
-	 */
-	private void addToAuction(HttpServletRequest request, HttpServletResponse response) {
-		int itemid;
-		String user = "user1"; // for user1 is adding the auction
-		ResultSet results;
-		
-		// get itemid
-		itemid = getItemID(request.getParameter("title"));
-		
-		System.out.println("Have item id, now adding the auction");
-		try {
-			auction.setInt(1, itemid);
-			auction.setString(2, user);
-			auction.setInt(3, Integer.parseInt(request.getParameter("length")));
-			
-			int updateCount = auction.executeUpdate();
-			if (updateCount > 0) {
-				System.out.println("Auction successfully added");
-				// implement email function here
-				RequestDispatcher rd = request.getRequestDispatcher("Success.jsp");
-				rd.forward(request, response);
-				return;
-			}
-			
-			// Default redirect to indicate failure
-			redirectFailedAttempt(request, response);
-		}
-		catch (Exception e) {
-			System.out.print("Error submitting Auction");
-			e.printStackTrace();
-			redirectFailedAttempt(request, response);
-		}
-			
-	}
-	
-	private Integer getItemID(String title) {
-		int itemNum = 0;
-		ResultSet rs;
-		
-		System.out.println("getItemId called");
-		
-		try {
-			item.setString(1,"iphone 5"); // title
-			rs = item.executeQuery();
-			if (rs.next()) {
-				System.out.println("have resultset");
-				itemNum = rs.getInt(1);
-				String titleName = rs.getString(2);
-				System.out.println("itemID: " + itemNum + " title: " + titleName);
-			}
-			else {
-				System.out.println("No set returned"); // will return 0
-			}
-		}
-		catch (Exception e) {
-			System.out.println("Failed to obtain item id");
-			e.printStackTrace();
-		}
-		
-		return itemNum;
 	}
 	
 	private void redirectFailedAttempt(HttpServletRequest request, HttpServletResponse response) {
