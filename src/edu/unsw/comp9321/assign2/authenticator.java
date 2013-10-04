@@ -30,12 +30,12 @@ public class authenticator {
 					rd.forward(request, response);
 				}
 				else {
-					RequestDispatcher rd = request.getRequestDispatcher("Main.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("BidList.jsp");
 					rd.forward(request, response);
 				}
 			}
 			else {
-				RequestDispatcher rd = request.getRequestDispatcher("LoginFailed.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
 				rd.forward(request, response);
 			}
 		}
