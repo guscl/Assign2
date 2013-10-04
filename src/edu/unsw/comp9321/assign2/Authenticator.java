@@ -5,11 +5,11 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class authenticator {
+public class Authenticator {
 	ConnectionManager cm;
 	Connection c;
 	
-	public authenticator() {
+	public Authenticator() {
 		cm = new ConnectionManager();
 		c = cm.getConnection();
 	}

@@ -45,7 +45,7 @@ public class ControlServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			System.out.println("username: " + user + " password: " + password);
 			
-			authenticator a = new authenticator();
+			Authenticator a = new Authenticator();
 			a.login(user, password, request, response);
 			
 		}

@@ -56,13 +56,14 @@ public class AuctionBuilder {
 				auction.setString(3, request.getParameter("length"));System.out.println("specified length");
 			}
 			auction.setString(4, request.getParameter("title"));
-			auction.setString(5, request.getParameter("category"));
-			auction.setString(6, request.getParameter("picture"));
-			auction.setString(7, request.getParameter("description"));
-			auction.setString(8, request.getParameter("postage"));
-			auction.setString(9, request.getParameter("startingPrice"));
-			auction.setString(10, request.getParameter("reservePrice"));
-			auction.setString(11, request.getParameter("biddingIncrements"));
+			auction.setString(5, request.getParameter("title"));
+			auction.setString(6, request.getParameter("category"));
+			auction.setString(7, request.getParameter("picture"));
+			auction.setString(8, request.getParameter("description"));
+			auction.setString(9, request.getParameter("postage"));
+			auction.setString(10, request.getParameter("startingPrice"));
+			auction.setString(11, request.getParameter("reservePrice"));
+			auction.setString(12, request.getParameter("biddingIncrements"));
 			
 			int result = auction.executeUpdate();
 			if (result > 0) {

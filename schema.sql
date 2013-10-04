@@ -29,6 +29,7 @@ CREATE TABLE auction (
         startingprice integer NOT NULL,
         reserveprice integer NOT NULL,
         bidincrement integer NOT NULL,
+        
         PRIMARY KEY (id)
 );
 

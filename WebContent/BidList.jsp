@@ -8,16 +8,24 @@
 </head>
 <body>
 
-	<table>
+	<table border=1>
+		<tr>
+			<td>Title</td>
+			<td>Description</td>
+			<td>Reserve Price</td>
+			<td>Lasting Minutes</td>
+			
+		</tr>
 		<%
 			//For fullfiling a list of bids
 			int i = 0;
 		%>
 
 		<tr>
-			<td><%=i %></td>
-			<td><%=i++ %></td>
-			<td><%=i-- %></td>
+			<td><%=i%></td>
+			<td><%=i++%></td>
+			<td><%=i--%></td>
+			<td><%=i--%></td>
 		</tr>
 
 		<%
@@ -25,7 +33,9 @@
 		%>
 
 	</table>
-	<br><a href="AuctionBuilder.jsp">Place an item for auction</a><br>
-	 
+	<br>
+	<a href="AuctionBuilder.jsp">Place an item for auction</a>
+	<br>
+
 </body>
 </html>

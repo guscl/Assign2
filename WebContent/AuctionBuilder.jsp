@@ -8,8 +8,8 @@
 </head>
 <body>
 
-<form name="userRegistration" action="ControlServlet?action=addAuction" method="POST">
-			<input type="hidden" name="action" value="search"/>
+<form name="AuctionRegistration" action="ControlServlet?action=addAuction" method="POST">
+			<input type="hidden" name="action" value="input"/>
 			<table>
 			<tr>
 				<td>Title</td>
