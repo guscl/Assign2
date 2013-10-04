@@ -45,10 +45,10 @@ public class AuctionBuilder {
 			auction.setString(1, "user1");
 			auction.setString(2, request.getParameter("start"));
 			if (request.getParameter("biddingHours").equals("")) {
-				auction.setString(3, "10"); System.out.println("empty length default to 10");
+				auction.setInt(3, 10); System.out.println("empty length default to 10");
 			}
-			if (Integer.parseInt(request.getParameter("biddingHours")) < 3 ||
-					Integer.parseInt(request.getParameter("biddingHours")) > 60) {
+			else if (Integer.parseInt(request.getParameter("biddingHours")) < 3 ||
+						Integer.parseInt(request.getParameter("biddingHours")) > 60) {
 				System.out.println("auction length is invalid");
 				redirectFailedAttempt(request, response);
 			}
