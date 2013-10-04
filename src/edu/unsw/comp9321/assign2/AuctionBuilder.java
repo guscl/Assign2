@@ -62,6 +62,8 @@ public class AuctionBuilder {
 			auction.setString(7, request.getParameter("postage"));
 			auction.setString(8, request.getParameter("startingPrice"));
 			auction.setString(9, request.getParameter("biddingIncrements"));
+			auction.setString(10, request.getParameter("reservePrice"));
+			auction.setString(11, request.getParameter("picture"));
 			int result = auction.executeUpdate();
 			if (result > 0) {
 				System.out.println("successfully added auction");
