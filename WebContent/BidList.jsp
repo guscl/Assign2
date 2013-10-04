@@ -25,7 +25,7 @@
 		%>
 
 	</table>
-	<br><a href="ItemRegistration.jsp">Place an item for auction</a><br>
+	<br><a href="AuctionBuilder.jsp">Place an item for auction</a><br>
 	 
 </body>
 </html>
