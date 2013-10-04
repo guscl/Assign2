@@ -68,7 +68,7 @@ public class Registration {
 			if (rowsUpdated > 0) {
 				System.out.println("User successfully registered");
 				
-				RequestDispatcher rd = request.getRequestDispatcher("Welcome.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
 				rd.forward(request, response);
 			}
 			else {
@@ -86,7 +86,7 @@ public class Registration {
 	
 	private void redirectFailedAttempt(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			RequestDispatcher rd = request.getRequestDispatcher("Registration.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("RegistrationError.jsp");
 			rd.forward(request, response);
 		}
 		catch (Exception e) {
