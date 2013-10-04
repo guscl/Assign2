@@ -67,7 +67,7 @@ public class AuctionBuilder {
 			int result = auction.executeUpdate();
 			if (result > 0) {
 				System.out.println("successfully added auction");
-				RequestDispatcher rd = request.getRequestDispatcher("Success.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("BidList.jsp");
 				try {
 					rd.forward(request, response);
 				}
