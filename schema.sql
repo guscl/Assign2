@@ -23,7 +23,7 @@ CREATE TABLE auction (
         status varchar(7) NOT NULL,
         title varChar(30) UNIQUE,
         category varChar(15) NOT NULL, -- valid categories to be included in code
-        picture varChar(20) NOT NULL, -- filename
+        picture varChar(100) NOT NULL, -- filename
         description varChar(100) NOT NULL,
         postagedetails varChar(50) NOT NULL,
         reserveprice integer NOT NULL,
