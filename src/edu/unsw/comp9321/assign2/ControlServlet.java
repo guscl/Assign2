@@ -59,8 +59,9 @@ public class ControlServlet extends HttpServlet {
 			ab.createAuction(request, response);
 		}
 		else if (request.getParameter("action").equals("bid")) {
-			Bid bid = new Bid();
-			bid.submitBid(request, response);
+			// to be implemented
+			/*Bid bid = new Bid();
+			bid.submitBid(request, response);*/
 		}
 		else if (request.getParameter("action").equals("admin")) {
 			Admin admin = new Admin();
