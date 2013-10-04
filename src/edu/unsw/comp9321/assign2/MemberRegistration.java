@@ -5,7 +5,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Registration {
+public class MemberRegistration {
 	ConnectionManager cm;
 	Connection c;
 	PreparedStatement register;
@@ -20,7 +20,7 @@ public class Registration {
 	String address;
 	String creditCard;
 	
-	public Registration() {
+	public MemberRegistration() {
 		cm = new ConnectionManager();
 		c = cm.getConnection();
 		updateString = "INSERT INTO member " +

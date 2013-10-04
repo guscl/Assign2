@@ -51,7 +51,7 @@ public class ControlServlet extends HttpServlet {
 		}
 		else if (request.getParameter("action").equals("register")) {
 			// do login stuff here
-			Registration r = new Registration();
+			MemberRegistration r = new MemberRegistration();
 			r.register(request, response);
 		}
 		else if (request.getParameter("action").equals("addAuction")) {

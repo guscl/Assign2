@@ -59,8 +59,7 @@
 
 		</tr>
 		<%
-			
-			UserReader userReader = new UserReader();
+			UserDBManager userReader = new UserDBManager();
 			ResultSet rs1 = userReader.getAllMembers();
 			UserBean userBean = new UserBean();
 			while(rs1.next()){
