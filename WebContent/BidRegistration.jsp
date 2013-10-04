@@ -21,7 +21,7 @@
 			</tr>
 			<tr>	
 				<td>Picture Url</td>
-				<td><input type="text" name="picture" maxlength="50" /></td>
+				<td><input type="text" name="picture" maxlength="100" /></td>
 			</tr>
 			<tr>	
 				<td>Description</td>
