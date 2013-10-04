@@ -45,8 +45,13 @@ public class AuctionBuilder {
 			auction.setString(1, "user1");
 			//auction.setString(1, request.getParameter("username"));
 			auction.setString(2, request.getParameter("start"));
-			if (request.getParameter("length").equals("")) {
+			if (request.getParameter("biddingHours").equals("")) {
 				auction.setString(3, "10"); System.out.println("empty length default to 10");
+			}
+			if (Integer.parseInt(request.getParameter("biddingHours")) < 3 ||
+					Integer.parseInt(request.getParameter("biddingHours")) > 60) {
+				System.out.println("auction length is invalid");
+				redirectFailedAttempt(request, response);
 			}
 			else {
 				auction.setString(3, request.getParameter("length"));System.out.println("specified length");
@@ -55,8 +60,8 @@ public class AuctionBuilder {
 			auction.setString(5, request.getParameter("category"));
 			auction.setString(6, request.getParameter("description"));
 			auction.setString(7, request.getParameter("postage"));
-			auction.setString(8, request.getParameter("reserve"));
-			auction.setString(9, request.getParameter("bidincrement"));
+			auction.setString(8, request.getParameter("startingPrice"));
+			auction.setString(9, request.getParameter("biddingIncrements"));
 			int result = auction.executeUpdate();
 			if (result > 0) {
 				System.out.println("successfully added auction");
