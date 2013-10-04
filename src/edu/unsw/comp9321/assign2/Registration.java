@@ -86,7 +86,7 @@ public class Registration {
 	
 	private void redirectFailedAttempt(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			RequestDispatcher rd = request.getRequestDispatcher("FailedRegistration.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("Registration.jsp");
 			rd.forward(request, response);
 		}
 		catch (Exception e) {
