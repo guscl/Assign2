@@ -26,6 +26,7 @@ CREATE TABLE auction (
         picture varChar(100) NOT NULL, -- filename
         description varChar(100) NOT NULL,
         postagedetails varChar(50) NOT NULL,
+        startingprice integer NOT NULL,
         reserveprice integer NOT NULL,
         bidincrement integer NOT NULL,
         PRIMARY KEY (id)
@@ -52,11 +53,11 @@ INSERT INTO member (username, nickname, firstname, lastname, password, email, bi
 INSERT INTO member (username, nickname, firstname, lastname, password, email, birthyear, address, creditcard, role, locked)
         VALUES ('user2', 'Jim', 'James', 'Jones', 'xyz246', 'jjones@someuni.edu', 1996, '4 George Street Sydney', '1234-5678-0000-1111', 'member', false);
 
-INSERT INTO auction (username, starttime, auctionlength, status, title, category, picture, description, postagedetails, reserveprice, bidincrement)
-		VALUES ('user2', '14:00', 160, 'new', 'DELL Laptop', 'Computer', 'image.jpg', 'Second hand laptop', 'Australia Post', 100, 50);
+INSERT INTO auction (username, starttime, auctionlength, status, title, category, picture, description, postagedetails, startingprice, reserveprice, bidincrement)
+		VALUES ('user2', '14:00', 160, 'new', 'DELL Laptop', 'Computer', 'image.jpg', 'Second hand laptop', 'Australia Post', 80, 100, 50);
 
-INSERT INTO auction (username, starttime, auctionlength, status, title, category, picture, description, postagedetails, reserveprice, bidincrement)
-		VALUES ('user2', '14:00', 180, 'started', 'Computer Networks', 'Book', 'image2.jpg', 'Textbook for computer network applications', 'Australia Post', 50, 5);
+INSERT INTO auction (username, starttime, auctionlength, status, title, category, picture, description, postagedetails, startingprice, reserveprice, bidincrement)
+		VALUES ('user2', '14:00', 180, 'started', 'Computer Networks', 'Book', 'image2.jpg', 'Textbook for computer network applications', 'Australia Post', 50, 60, 5);
 		
 INSERT INTO bid (biddate, bidtime, bidder, auctionid, amount)
 		VALUES (DATE('10/14/2013'), '12:00', 'user1', 2, 55);
