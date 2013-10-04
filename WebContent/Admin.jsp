@@ -24,7 +24,7 @@
 		%>
 
 	</table>
-
+	<form action="ControlServlet?action=admin" method ="post" >
 	<tr>
 		<td>Halt Auction with the following Id:</td>
 		<td><input type="text" name="haltAuction" maxlength="20" />
@@ -41,5 +41,6 @@
 		<td><input type="submit" name="removeUserButton" value="Remove user"> 
 		</td>
 	</tr>
+	</form>
 </body>
 </html>
