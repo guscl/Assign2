@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="edu.unsw.comp9321.assign2.*,java.sql.*" %>
+	pageEncoding="UTF-8" import="edu.unsw.comp9321.assign2.*,java.sql.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,7 +14,7 @@
 			<td>Description</td>
 			<td>Reserve Price</td>
 			<td>Lasting Minutes</td>
-			
+
 		</tr>
 		<%
 			
@@ -35,25 +35,17 @@
 				bean.setStartingPrice(rs.getInt("startingprice"));
 				bean.setReservePrice(rs.getInt("reserveprice"));
 				bean.setBiddingIncrement(rs.getInt("bidincrement"));
-				
-				
-			
-			}
-			
-			
-			//For fullfiling a list of bids
-			int i = 0;
 		%>
 
 		<tr>
-			<td><%=i%></td>
-			<td><%=i++%></td>
-			<td><%=i--%></td>
-			<td><%=i--%></td>
+			<td><%=bean.getTitle()%></td>
+			<td><%=bean.getDescription()%></td>
+			<td><%=bean.getReservePrice()%></td>
+			<td>????</td>
 		</tr>
 
 		<%
-			//end of for
+			}
 		%>
 
 	</table>
