@@ -2,10 +2,10 @@ package edu.unsw.comp9321.assign2;
 
 public class UserBean {
 	
-	private String username;
-	private String nickmane;
+	private String userName;
+	private String nickname;
 	private String firstName;
-	private String lastNameString;
+	private String lastName;
 	private String password;
 	private String email;
 	private int birthYear;
@@ -13,17 +13,18 @@ public class UserBean {
 	private String creditCard;
 	private String role;
 	private boolean locked;
-	public String getUsername() {
-		return username;
+	
+	public String getUserName() {
+		return userName;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String username) {
+		this.userName = username;
 	}
-	public String getNickmane() {
-		return nickmane;
+	public String getNicknane() {
+		return nickname;
 	}
-	public void setNickmane(String nickmane) {
-		this.nickmane = nickmane;
+	public void setNicknane(String nickmane) {
+		this.nickname = nickmane;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -31,11 +32,11 @@ public class UserBean {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	public String getLastNameString() {
-		return lastNameString;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setLastNameString(String lastNameString) {
-		this.lastNameString = lastNameString;
+	public void setLastName(String lastNameString) {
+		this.lastName = lastNameString;
 	}
 	public String getPassword() {
 		return password;

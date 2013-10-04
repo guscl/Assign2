@@ -20,29 +20,29 @@
 			
 			AuctionReader auctionReader = new AuctionReader();
 			ResultSet rs = auctionReader.getAuctions();
-			AuctionBean bean = new AuctionBean();
+			AuctionBean auctionBean = new AuctionBean();
 			while(rs.next()){
-				bean.setId(rs.getInt("id"));
-				bean.setUsername(rs.getString("username"));
-				bean.setStartTime(rs.getTime("starttime").toString());
-				bean.setAuctionLength(rs.getInt("auctionlength"));
-				bean.setStatus(rs.getString("status"));
-				bean.setTitle(rs.getString("title"));
-				bean.setCategory(rs.getString("category"));
-				bean.setPictureUrl(rs.getString("picture"));
-				bean.setDescription(rs.getString("description"));
-				bean.setPostageDetails(rs.getString("postagedetails"));
-				bean.setStartingPrice(rs.getInt("startingprice"));
-				bean.setReservePrice(rs.getInt("reserveprice"));
-				bean.setBiddingIncrement(rs.getInt("bidincrement"));
+				auctionBean.setId(rs.getInt("id"));
+				auctionBean.setUsername(rs.getString("username"));
+				auctionBean.setStartTime(rs.getTime("starttime").toString());
+				auctionBean.setAuctionLength(rs.getInt("auctionlength"));
+				auctionBean.setStatus(rs.getString("status"));
+				auctionBean.setTitle(rs.getString("title"));
+				auctionBean.setCategory(rs.getString("category"));
+				auctionBean.setPictureUrl(rs.getString("picture"));
+				auctionBean.setDescription(rs.getString("description"));
+				auctionBean.setPostageDetails(rs.getString("postagedetails"));
+				auctionBean.setStartingPrice(rs.getInt("startingprice"));
+				auctionBean.setReservePrice(rs.getInt("reserveprice"));
+				auctionBean.setBiddingIncrement(rs.getInt("bidincrement"));
 		%>
 
 		<tr>
-			<td><%=bean.getTitle()%></td>
-			<td><%=bean.getDescription()%></td>
-			<td><%=bean.getReservePrice()%></td>
+			<td><%=auctionBean.getTitle()%></td>
+			<td><%=auctionBean.getDescription()%></td>
+			<td><%=auctionBean.getReservePrice()%></td>
 			<td>????</td>
-			<td><%=bean.getId()%></td>
+			<td><%=auctionBean.getId()%></td>
 		</tr>
 
 		<%
@@ -50,6 +50,48 @@
 		%>
 
 	</table><br>
+	
+	<table border=1>
+		<tr>
+			<td>Username</td>
+			<td>Email</td>
+			<td>Locked</td>
+
+		</tr>
+		<%
+			
+			UserReader userReader = new UserReader();
+			ResultSet rs1 = userReader.getAllMembers();
+			UserBean userBean = new UserBean();
+			while(rs1.next()){
+				userBean.setUserName(rs1.getString("username"));
+				userBean.setNicknane(rs1.getString("nickname"));
+				userBean.setFirstName(rs1.getString("firstname"));
+				userBean.setLastName(rs1.getString("lastname"));
+				userBean.setPassword(rs1.getString("password"));
+				userBean.setEmail(rs1.getString("email"));
+				userBean.setBirthYear(rs1.getInt("birthyear"));
+				userBean.setAddress(rs1.getString("address"));
+				userBean.setCreditCard(rs1.getString("creditcard"));
+				userBean.setRole(rs1.getString("role"));
+				userBean.setLocked(rs1.getBoolean("locked"));
+		%>
+
+		<tr>
+			<td><%=userBean.getUserName()%></td>
+			<td><%=userBean.getEmail()%></td>
+			<td><%=userBean.isLocked()%></td>
+			
+		</tr>
+
+		<%
+			}
+		%>
+
+	</table><br>
+	
+	
+	
 	<form action="ControlServlet?action=admin" method ="post" >
 	<tr>
 		<td>Halt Auction with the following Id:</td>
