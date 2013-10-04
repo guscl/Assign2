@@ -18,8 +18,8 @@ public class AuctionBuilder {
 		auctionString = "INSERT INTO auction (username, starttime, " +
 							"auctionlength, status, title, category, " +
 							"picture, description, postagedetails, " +
-							"reserveprice, bidincrement)" +
-						"VALUES (?, ?, ?, 'new', ?, ?, 'image.jpg', ?, ?, ?, ?)";
+							"startingprice, reserveprice, bidincrement)" +
+						"VALUES (?, ?, ?, 'new', ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		// prepare statement
 		try {
@@ -43,7 +43,6 @@ public class AuctionBuilder {
 		
 		try {
 			auction.setString(1, "user1");
-			//auction.setString(1, request.getParameter("username"));
 			auction.setString(2, request.getParameter("start"));
 			if (request.getParameter("biddingHours").equals("")) {
 				auction.setString(3, "10"); System.out.println("empty length default to 10");
@@ -58,12 +57,13 @@ public class AuctionBuilder {
 			}
 			auction.setString(4, request.getParameter("title"));
 			auction.setString(5, request.getParameter("category"));
-			auction.setString(6, request.getParameter("description"));
-			auction.setString(7, request.getParameter("postage"));
-			auction.setString(8, request.getParameter("startingPrice"));
-			auction.setString(9, request.getParameter("biddingIncrements"));
+			auction.setString(6, request.getParameter("picture"));
+			auction.setString(7, request.getParameter("description"));
+			auction.setString(8, request.getParameter("postage"));
+			auction.setString(9, request.getParameter("startingPrice"));
 			auction.setString(10, request.getParameter("reservePrice"));
-			auction.setString(11, request.getParameter("picture"));
+			auction.setString(11, request.getParameter("biddingIncrements"));
+			
 			int result = auction.executeUpdate();
 			if (result > 0) {
 				System.out.println("successfully added auction");
@@ -100,7 +100,7 @@ public class AuctionBuilder {
 	
 	private void redirectFailedAttempt(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			RequestDispatcher rdFailed = request.getRequestDispatcher("AuctionFailed.jsp");
+			RequestDispatcher rdFailed = request.getRequestDispatcher("BidRegistration.jsp");
 			rdFailed.forward(request, response);
 		}
 		catch (Exception e) {
