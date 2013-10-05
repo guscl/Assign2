@@ -16,10 +16,13 @@
 			<td>Lasting Minutes</td>
 
 		</tr>
+		<!-- temp section -->
 		<%
 			if (request.getAttribute("SessionTracker") == null) {
 				System.out.println("unknown user is not permitted");
 				// redirect user away
+				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+				rd.forward(request, response);
 			}
 			else { 				
 			SessionBean sb = (SessionBean) request.getAttribute("SessionTracker");
@@ -27,6 +30,7 @@
 			System.out.println("user is: " + user);
 			}
 		%>
+		<!-- end of temp  -->
 		<%
 			
 			AuctionReader auctionReader = new AuctionReader();
@@ -64,5 +68,9 @@
 	<a href="AuctionBuilder.jsp">Place an item for auction</a>
 	<br>
 
+	<br>
+	<form action="ControlServlet?action=logout" method="post">
+		<input type='submit' value='Log Out'>
+	</form>
 </body>
 </html>
