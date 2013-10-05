@@ -63,6 +63,11 @@ public class ControlServlet extends HttpServlet {
 			/*Bid bid = new Bid();
 			bid.submitBid(request, response);*/
 		}
+		else if (request.getParameter("action").equals("logout")) {
+			request.setAttribute("SessionTracker", null);
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+			rd.forward(request, response);
+		}
 		else if (request.getParameter("action").equals("admin")) {
 			Admin admin = new Admin();
 			admin.adminFunction(request, response);
