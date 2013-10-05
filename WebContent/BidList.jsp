@@ -17,6 +17,17 @@
 
 		</tr>
 		<%
+			if (request.getAttribute("SessionTracker") == null) {
+				System.out.println("unknown user is not permitted");
+				// redirect user away
+			}
+			else { 				
+			SessionBean sb = (SessionBean) request.getAttribute("SessionTracker");
+			String user = sb.getUser();
+			System.out.println("user is: " + user);
+			}
+		%>
+		<%
 			
 			AuctionReader auctionReader = new AuctionReader();
 			ResultSet rs = auctionReader.getAuctions();
