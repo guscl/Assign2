@@ -16,6 +16,10 @@
 				<td><input type="text" name="username" maxlength="20" /></td>
 			</tr>
 			<tr>
+				<td>Password</td>
+				<td><input type="text" name="password" maxlength="20" /></td>
+			</tr>
+			<tr>
 				<td>Nickname </td>
 				<td><input type="text" name="nickname" maxlength="20" /></td>
 			</tr>
