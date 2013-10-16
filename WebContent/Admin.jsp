@@ -17,6 +17,21 @@
 
 		</tr>
 		<%
+			if (request.getAttribute("SessionTracker") == null) {
+				System.out.println("session is null");
+				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+				rd.forward(request, response);
+			}
+			else {
+				SessionBean sb = (SessionBean) request.getAttribute("SessionTracker");
+				if (sb.getRole().equals("member")) {
+					System.out.println("user: " + sb.getUser() + " is a " + sb.getRole());
+					RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+					rd.forward(request, response);
+				}
+			}
+		%>
+		<%
 			
 			AuctionReader auctionReader = new AuctionReader();
 			ResultSet rs = auctionReader.getAuctions();
@@ -108,6 +123,9 @@
 		<td><input type="submit" name="removeUserButton" value="Remove user"> 
 		</td>
 	</tr>
+	</form>
+	<form action="ControlServlet?action=logout" method="post" >
+		<input type="submit" name="logout" value="logout"> 
 	</form>
 </body>
 </html>
