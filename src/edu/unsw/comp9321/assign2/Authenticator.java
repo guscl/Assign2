@@ -5,43 +5,70 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Authenticator {
+public class authenticator {
 	ConnectionManager cm;
 	Connection c;
 	
-	public Authenticator() {
+	public authenticator() {
 		cm = new ConnectionManager();
 		c = cm.getConnection();
 	}
 	
-	public void login(String user, String password,
-			HttpServletRequest request, HttpServletResponse response) {
+	public void login(HttpServletRequest request, 
+						HttpServletResponse response) {
+		String user = request.getParameter("username");
+		String password = request.getParameter("password");
+		System.out.println("username: " + user + " password: " + password);
 		
-		try {
-			PreparedStatement login = c.prepareStatement("select * " +
-														 "from member " +
-														 "where username=? and password=?");
-			login.setString(1, user);
-			login.setString(2, password);
-			ResultSet result = login.executeQuery();
-			if (result.next()) {
-				if (result.getString("role").equals("administrator")) {
-					RequestDispatcher rd = request.getRequestDispatcher("Admin.jsp");
-					rd.forward(request, response);
+		if (validator.checkText(user) && validator.checkPassword(password)) {
+			try {
+				PreparedStatement login = c.prepareStatement("select * " +
+															 "from member " +
+															 "where username=? and password=?");
+				login.setString(1, user);
+				login.setString(2, password);
+				
+				ResultSet result = login.executeQuery();
+				if (result.next()) {
+					System.out.println("Role is: " + result.getString("role"));
+					if (result.getString("role").equals("administrator")) {
+						SessionBean session = new SessionBean(user, "admin");
+						request.setAttribute("SessionTracker", session);
+						RequestDispatcher rd = request.getRequestDispatcher("Admin.jsp");
+						rd.forward(request, response);
+					}
+					else {
+						SessionBean session = new SessionBean(user, "admin"); 
+						request.setAttribute("SessionTracker", session);
+						RequestDispatcher rd = request.getRequestDispatcher("BidList.jsp");
+						rd.forward(request, response);
+					}
 				}
 				else {
-					RequestDispatcher rd = request.getRequestDispatcher("BidList.jsp");
+					request.setAttribute("failed", "notFound");
+					RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 					rd.forward(request, response);
 				}
 			}
-			else {
-				RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
-				rd.forward(request, response);
+			catch (Exception e) {
+				System.out.println("An error occured");
+				e.printStackTrace();
+				return;
 			}
 		}
-		catch (Exception e) {
-			System.out.println("An error occured");
-			e.printStackTrace();
+		else {
+			System.out.println("Validation failed");
+			try {
+				request.setAttribute("failed", "invalid");
+				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+				rd.forward(request, response);
+			}
+			catch (Exception e) {
+				System.out.println("Validation Error occured, redirecting");
+			}
+			
 		}
+		
 	}
+	
 }
