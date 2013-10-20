@@ -18,7 +18,8 @@ CREATE TABLE member (
 CREATE TABLE auction (
 		id	integer NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
         username varChar(20) NOT NULL,
-        starttime time,
+        auctiondate char(11),
+        starttime varChar(8), -- formerly date
         auctionlength integer,
         status varchar(7) NOT NULL,
         title varChar(30) UNIQUE,
@@ -54,11 +55,11 @@ INSERT INTO member (username, nickname, firstname, lastname, password, email, bi
 INSERT INTO member (username, nickname, firstname, lastname, password, email, birthyear, address, creditcard, role, locked)
         VALUES ('user2', 'Jim', 'James', 'Jones', 'xyz246', 'jjones@someuni.edu', 1996, '4 George Street Sydney', '1234-5678-0000-1111', 'member', false);
 
-INSERT INTO auction (username, starttime, auctionlength, status, title, category, picture, description, postagedetails, startingprice, reserveprice, bidincrement)
-		VALUES ('user2', '14:00', 160, 'new', 'DELL Laptop', 'Computer', 'image.jpg', 'Second hand laptop', 'Australia Post', 80, 100, 50);
+INSERT INTO auction (username, auctiondate, starttime, auctionlength, status, title, category, picture, description, postagedetails, startingprice, reserveprice, bidincrement)
+		VALUES ('user2', '20-Oct-2013', '14:00:00', 160, 'new', 'DELL Laptop', 'Computer', 'image.jpg', 'Second hand laptop', 'Australia Post', 80, 100, 50);
 
-INSERT INTO auction (username, starttime, auctionlength, status, title, category, picture, description, postagedetails, startingprice, reserveprice, bidincrement)
-		VALUES ('user2', '14:00', 180, 'started', 'Computer Networks', 'Book', 'image2.jpg', 'Textbook for computer network applications', 'Australia Post', 50, 60, 5);
-		
+INSERT INTO auction (username, auctiondate, starttime, auctionlength, status, title, category, picture, description, postagedetails, startingprice, reserveprice, bidincrement)
+		VALUES ('user2', '20-Oct-2013', '14:00:00', 180, 'started', 'Computer Networks', 'Book', 'image2.jpg', 'Textbook for computer network applications', 'Australia Post', 50, 60, 5);
+
 INSERT INTO bid (biddate, bidtime, bidder, auctionid, amount)
 		VALUES (DATE('10/14/2013'), '12:00', 'user1', 2, 55);
