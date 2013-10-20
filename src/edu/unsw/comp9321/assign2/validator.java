@@ -13,7 +13,7 @@ public class validator {
 	// used to check username and other values with no spaces
 	public static boolean checkText(String text) {
 		System.out.println("validation string: " + text);
-		String regex = "[^=*][a-zA-Z0-9]*"; // work for user 1
+		String regex = "[^=*][a-zA-Z0-9]*"; 
 		pattern = Pattern.compile(regex);
 		matcher = pattern.matcher(text);
 		return matcher.matches();
@@ -21,7 +21,7 @@ public class validator {
 	
 	public static boolean checkPassword(String password) {
 		System.out.println("validation string: " + password);
-		String regex = "[^=*][a-zA-Z0-9]*"; // work for user 1
+		String regex = "[^=*][a-zA-Z0-9]*"; 
 		pattern = Pattern.compile(regex);
 		matcher = pattern.matcher(password);
 		return matcher.matches();
@@ -57,7 +57,22 @@ public class validator {
 		return matcher.matches();
 	}
 	
+	/*
+	 * Regex scourced from Stack overflow
+	 * http://stackoverflow.com/questions/163360/regular-expresion-to-match-urls-in-java/275997#275997
+	 */
 	public static boolean checkURL(String url) {
+		System.out.println("validation string: " + url);
+		String regex = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|](.jpg|.jpeg|.png)$"; 
+		pattern = Pattern.compile(regex);
+		matcher = pattern.matcher(url);
+		return matcher.matches();
+	}
+	
+	public static boolean checkDollarValue(int amount) {
+		if (amount <= 0) {
+			return false;
+		}
 		return true;
 	}
 }
